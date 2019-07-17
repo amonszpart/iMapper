@@ -1,0 +1,421 @@
+0	sitting
+1	sitting
+2	sitting
+3	sitting
+4	sitting
+5	sitting
+6	sitting
+7	sitting
+8	sitting
+9	sitting
+10	sitting
+11	sitting
+12	sitting
+13	sitting
+14	sitting
+15	sitting
+16	sitting
+17	sitting
+18	sitting
+19	sitting
+20	sitting
+21	sitting
+22	sitting
+23	sitting
+24	sitting
+25	sitting
+26	sitting
+27	sitting
+28	sitting
+29	sitting
+30	sitting
+31	sitting
+32	sitting
+33	sitting
+34	sitting
+35	sitting
+36	sitting
+37	standing(from sitting)
+38	standing(from sitting)
+39	standing(from sitting)
+40	standing(from sitting)
+41	standing(from sitting)
+42	standing(from sitting)
+43	standing(from sitting)
+44	standing(from sitting)
+45	standing(from sitting)
+46	standing(from sitting)
+47	standing(from sitting)
+48	walking
+49	walking
+50	walking
+51	walking
+52	walking
+53	walking
+54	walking
+55	walking
+56	walking
+57	walking
+58	walking
+59	walking
+60	walking
+61	walking
+62	walking
+63	walking
+64	walking
+65	walking
+66	walking
+67	walking
+68	walking
+69	walking
+70	walking
+71	walking
+72	walking
+73	walking
+74	walking
+75	walking
+76	walking
+77	walking
+78	walking
+79	walking
+80	walking
+81	walking
+82	walking
+83	walking
+84	walking
+85	walking
+86	walking
+87	walking
+88	walking
+89	walking
+90	walking
+91	walking
+92	walking
+93	walking
+94	walking
+95	walking
+96	walking
+97	walking
+98	walking
+99	walking
+100	walking
+101	walking
+102	sitting
+103	sitting
+104	sitting
+105	sitting
+106	sitting
+107	sitting
+108	sitting
+109	sitting
+110	sitting
+111	sitting
+112	sitting
+113	sitting
+114	sitting
+115	sitting
+116	sitting
+117	sitting
+118	sitting
+119	sitting
+120	sitting
+121	sitting
+122	sitting
+123	sitting
+124	sitting
+125	sitting
+126	sitting
+127	sitting
+128	sitting
+129	sitting
+130	sitting
+131	sitting
+132	sitting
+133	sitting
+134	sitting
+135	sitting
+136	sitting
+137	sitting
+138	standing(from sitting)
+139	standing(from sitting)
+140	standing(from sitting)
+141	standing(from sitting)
+142	standing(from sitting)
+143	standing(from sitting)
+144	standing(from sitting)
+145	standing(from sitting)
+146	standing(from sitting)
+147	standing(from sitting)
+148	standing(from sitting)
+149	standing(from sitting)
+150	standing(from sitting)
+151	standing(from sitting)
+152	standing(from sitting)
+153	walking
+154	walking
+155	walking
+156	walking
+157	walking
+158	walking
+159	walking
+160	walking
+161	walking
+162	walking
+163	walking
+164	walking
+165	walking
+166	walking
+167	walking
+168	walking
+169	walking
+170	walking
+171	walking
+172	walking
+173	walking
+174	walking
+175	walking
+176	walking
+177	walking
+178	walking
+179	walking
+180	walking
+181	walking
+182	sitting
+183	sitting
+184	sitting
+185	sitting
+186	sitting
+187	sitting
+188	sitting
+189	sitting
+190	sitting
+191	sitting
+192	sitting
+193	sitting
+194	sitting
+195	sitting
+196	sitting
+197	sitting
+198	sitting
+199	sitting
+200	sitting
+201	sitting
+202	sitting
+203	sitting
+204	sitting
+205	sitting
+206	sitting
+207	sitting
+208	sitting
+209	sitting
+210	sitting
+211	sitting
+212	sitting
+213	sitting
+214	sitting
+215	sitting
+216	sitting
+217	sitting
+218	sitting
+219	sitting
+220	sitting
+221	sitting
+222	sitting
+223	sitting
+224	sitting
+225	sitting
+226	sitting
+227	standing(from sitting)
+228	standing(from sitting)
+229	standing(from sitting)
+230	standing(from sitting)
+231	standing(from sitting)
+232	standing(from sitting)
+233	standing(from sitting)
+234	standing(from sitting)
+235	standing(from sitting)
+236	standing(from sitting)
+237	standing(from sitting)
+238	walking
+239	walking
+240	walking
+241	walking
+242	walking
+243	walking
+244	walking
+245	walking
+246	walking
+247	walking
+248	walking
+249	walking
+250	walking
+251	walking
+252	walking
+253	walking
+254	walking
+255	walking
+256	walking
+257	walking
+258	walking
+259	walking
+260	walking
+261	walking
+262	walking
+263	walking
+264	walking
+265	walking
+266	walking
+267	walking
+268	walking
+269	walking
+270	walking
+271	walking
+272	walking
+273	walking
+274	walking
+275	walking
+276	walking
+277	walking
+278	walking
+279	walking
+280	walking
+281	walking
+282	walking
+283	walking
+284	walking
+285	walking
+286	walking
+287	walking
+288	walking
+289	walking
+290	walking
+291	walking
+292	walking
+293	walking
+294	walking
+295	walking
+296	walking
+297	sitting
+298	sitting
+299	sitting
+300	sitting
+301	sitting
+302	sitting
+303	sitting
+304	sitting
+305	sitting
+306	sitting
+307	sitting
+308	sitting
+309	sitting
+310	sitting
+311	sitting
+312	sitting
+313	sitting
+314	sitting
+315	sitting
+316	sitting
+317	sitting
+318	sitting
+319	sitting
+320	sitting
+321	sitting
+322	sitting
+323	sitting
+324	sitting
+325	sitting
+326	sitting
+327	sitting
+328	sitting
+329	sitting
+330	sitting
+331	sitting
+332	sitting
+333	standing(from sitting)
+334	standing(from sitting)
+335	standing(from sitting)
+336	standing(from sitting)
+337	standing(from sitting)
+338	standing(from sitting)
+339	standing(from sitting)
+340	standing(from sitting)
+341	standing(from sitting)
+342	standing(from sitting)
+343	standing(from sitting)
+344	standing(from sitting)
+345	standing(from sitting)
+346	standing(from sitting)
+347	walking
+348	walking
+349	walking
+350	walking
+351	walking
+352	walking
+353	walking
+354	walking
+355	walking
+356	walking
+357	walking
+358	walking
+359	walking
+360	walking
+361	walking
+362	walking
+363	walking
+364	walking
+365	walking
+366	walking
+367	walking
+368	walking
+369	walking
+370	walking
+371	walking
+372	walking
+373	walking
+374	walking
+375	walking
+376	walking
+377	walking
+378	walking
+379	walking
+380	walking
+381	walking
+382	walking
+383	walking
+384	walking
+385	walking
+386	walking
+387	walking
+388	walking
+389	walking
+390	walking
+391	walking
+392	walking
+393	walking
+394	walking
+395	walking
+396	walking
+397	walking
+398	walking
+399	walking
+400	walking
+401	walking
+402	walking
+403	walking
+404	walking
+405	walking
+406	walking
+407	walking
+408	walking
+409	walking
+410	walking
+411	walking
+412	walking
+413	walking
+414	walking
+415	walking
+416	walking
+417	walking
+418	walking
+419	walking
+420	walking

@@ -1,0 +1,225 @@
+0	walking
+1	walking
+2	walking
+3	walking
+4	walking
+5	walking
+6	walking
+7	walking
+8	walking
+9	walking
+10	walking
+11	walking
+12	walking
+13	walking
+14	walking
+15	walking
+16	walking
+17	walking
+18	walking
+19	walking
+20	sitting
+21	sitting
+22	sitting
+23	sitting
+24	sitting
+25	sitting
+26	sitting
+27	sitting
+28	sitting
+29	sitting
+30	sitting
+31	sitting
+32	sitting
+33	sitting
+34	sitting
+35	sitting
+36	sitting
+37	sitting
+38	sitting
+39	sitting
+40	sitting
+41	sitting
+42	sitting
+43	sitting
+44	sitting
+45	sitting
+46	sitting
+47	sitting
+48	sitting
+49	sitting
+50	sitting
+51	standing(from sitting)
+52	standing(from sitting)
+53	standing(from sitting)
+54	standing(from sitting)
+55	standing(from sitting)
+56	standing(from sitting)
+57	standing(from sitting)
+58	standing(from sitting)
+59	standing(from sitting)
+60	standing(from sitting)
+61	walking
+62	walking
+63	walking
+64	walking
+65	walking
+66	walking
+67	walking
+68	walking
+69	walking
+70	walking
+71	walking
+72	walking
+73	walking
+74	walking
+75	walking
+76	walking
+77	walking
+78	walking
+79	walking
+80	walking
+81	walking
+82	walking
+83	walking
+84	walking
+85	walking
+86	walking
+87	walking
+88	walking
+89	walking
+90	walking
+91	walking
+92	walking
+93	walking
+94	walking
+95	walking
+96	walking
+97	sitting
+98	sitting
+99	sitting
+100	sitting
+101	sitting
+102	sitting
+103	sitting
+104	sitting
+105	sitting
+106	sitting
+107	sitting
+108	sitting
+109	sitting
+110	sitting
+111	sitting
+112	sitting
+113	sitting
+114	sitting
+115	sitting
+116	sitting
+117	sitting
+118	standing(from sitting)
+119	standing(from sitting)
+120	standing(from sitting)
+121	standing(from sitting)
+122	standing(from sitting)
+123	standing(from sitting)
+124	standing(from sitting)
+125	standing(from sitting)
+126	standing(from sitting)
+127	standing(from sitting)
+128	standing(from sitting)
+129	standing(from sitting)
+130	standing(from sitting)
+131	walking
+132	walking
+133	walking
+134	walking
+135	walking
+136	walking
+137	walking
+138	walking
+139	walking
+140	walking
+141	walking
+142	walking
+143	walking
+144	walking
+145	walking
+146	walking
+147	walking
+148	walking
+149	walking
+150	walking
+151	walking
+152	walking
+153	walking
+154	walking
+155	walking
+156	walking
+157	walking
+158	sitting
+159	sitting
+160	sitting
+161	sitting
+162	sitting
+163	sitting
+164	sitting
+165	sitting
+166	sitting
+167	sitting
+168	sitting
+169	sitting
+170	sitting
+171	sitting
+172	sitting
+173	sitting
+174	sitting
+175	sitting
+176	sitting
+177	sitting
+178	sitting
+179	sitting
+180	standing(from sitting)
+181	standing(from sitting)
+182	standing(from sitting)
+183	standing(from sitting)
+184	standing(from sitting)
+185	standing(from sitting)
+186	standing(from sitting)
+187	standing(from sitting)
+188	standing(from sitting)
+189	standing(from sitting)
+190	standing(from sitting)
+191	standing(from sitting)
+192	walking
+193	walking
+194	walking
+195	walking
+196	walking
+197	walking
+198	walking
+199	walking
+200	walking
+201	walking
+202	walking
+203	walking
+204	walking
+205	walking
+206	walking
+207	walking
+208	walking
+209	walking
+210	walking
+211	walking
+212	walking
+213	walking
+214	walking
+215	walking
+216	walking
+217	walking
+218	walking
+219	walking
+220	walking
+221	walking
+222	walking
+223	walking
+224	walking
