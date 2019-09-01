@@ -10,9 +10,11 @@ RUN apt update \
     git cmake build-essential wget ssh gdb ca-certificates rsync \
     python3 python3-numpy python3-wheel python3-setuptools python3-opencv \
     ffmpeg python-dev python-pip python-opencv python-setuptools python-tk \
+    blender \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip2 install tensorflow-gpu==1.14 wheel repoze.lru future ujson
+RUN pip2 install tensorflow-gpu==1.14 wheel repoze.lru future ujson \
+ && pip3 install matplotlib ujson scipy
 
 RUN git clone \
     https://github.com/amonszpart/Lifting-from-the-Deep-release.git \
@@ -27,4 +29,9 @@ RUN git clone \
  && sed -i -e "s/^export PS1/[ -z \"\$PS1\" ] \&\& return\n\nexport PS1/g" /etc/bash.bashrc \
  && ln -s /usr/bin/ffmpeg /usr/bin/avconv
 
+
+RUN cd /opt/iMapper/i3DB \
+ && wget http://geometry.cs.ucl.ac.uk/projects/2019/imapper/pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz \
+ && tar -xvzf pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz \
+ && rm -rf pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz
 WORKDIR "/opt/iMapper"

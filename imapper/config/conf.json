@@ -1,0 +1,57 @@
+{
+  "one_euro": {
+    "freq": 1.0,
+    "mincutoff": 0.1,
+    "beta": 1.0,
+    "dcutoff": 1.0
+  },
+  "skeleton" : {
+    "density_bandwidth": 0.2
+  },
+  "volume": {
+    "with_confidence": false,
+    "_comment_with_confidence": "Use the scenelet confidence of the input video path to weigh the histograms.",
+    "with_density": false,
+    "_comment_with_density": "Use the inverse density of the input video path to weigh the histograms.",
+    "min_evidence": 1.0e-6,
+    "_comment_min_evidence": "Minimum amount of evidence to consider placement. (candidates.py)",
+    "sat_fun_beta": 2.5,
+    "resolution": 0.1,
+    "_comment_resolution": "Spatial resolution of volume in x and y"
+  },
+  "occurrence": {
+    "n_samples": 2000,
+    "_comment_n_samples": "How many samples to use when querying the DBN."
+  },
+  "optimize_path": {
+    "winsorize_limit": 0.05,
+    "height_correction": 1.0,
+    "_comment_height_correction": "Used in main_denis.py to scale down the skeleton from 2m, which will then push it more far away and make the scene larger.",
+    "person_height": 1.8,
+    "_comment_person_height": "Rescale LFD poses to this height in meters.",
+    "focal_correction": 1.2,
+    "_comment_focal_correction": "Used in main_denis.py to make the scene larger.",
+    "head_ank_dthresh": 0.7,
+    "_comment_head_ank_dthresh": "Filter 3D local pose if smallest distance between ankle and head is smaller, than this (wrong reconstruction).",
+    "torso_length_thresh": 0.15,
+    "_comment_torso_length_thresh": "The shortest distance between thorax and pelvis for a valid 3D pose."
+  },
+  "placement": {
+    "arr_model_max_dist": 2.0,
+    "_comment_arr_model_max_dist": "Maximum distance where the arrangement model is taken into account.",
+    "n_samples": 200,
+    "_comment_n_samples": "How many samples to use to sample a rectangle.",
+    "video_penalty_max_dist": 0.15,
+    "_comment_video_penalty_max_dist": "How far away from the path we should still penalize an object."
+  },
+  "path": {
+    "threshold_distance": 1.0,
+    "_comment_threshold_distance": "Path (arc-length) distance threshold for non-maxima suppression along path.",
+    "thresh_log_conf": 7.5,
+    "_comment_thresh_log_conf": "Log threshold for a video detection to count as visible.",
+    "part_side_size_threshold": 0.05,
+    "_comment_part_side_size_threshold": "Don't consider object parts that have small side lengths.",
+    "mgrid_res": 0.13,
+    "_comment_mgrid_res": "How densely to sample a top-view rectangle for oo intersection in meters. 0.4 means almost half meter (sparse)."
+  }
+}
