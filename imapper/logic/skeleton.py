@@ -686,7 +686,8 @@ class Skeleton(object):
         """
 
         if frames_mod is None:
-            assert actor_id == 0, "need 1 actor when no frames_mod"
+            assert actor_id == 0, \
+                "need 1 actor when no frames_mod, actor_id={}".format(actor_id)
             return frame_id
         else:
             return frame_id + frames_mod * actor_id

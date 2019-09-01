@@ -1,22 +1,29 @@
-if [ $# -ne 3 ];
+if [ $# -lt 1 ];
 then
-    echo "Usage: command.sh <avconvrate> <start> <duration>"
+    echo "Usage: command.sh <avconvrate> [<start> <duration>]"
     exit 1
 fi
 
-rate=$1
-start=$2
-duration=$3
+rate="$1"
+if [ -n "$2" ]; then start="$2"; fi
+if [ -n "$3" ]; then duration="$3"; fi
 
-scene=$(basename $(pwd))
-echo "scene: $scene"
-video=$(find . -maxdepth 1 -name '*.MOV' -o -name '*.mp4' -o -name '*.MP4' -o -name '*.m4v' -o -name '*.webm' -o -name '*.avi') && echo "Video is $video"
-rm -r origjpg
+scene="$(basename $(pwd))"
+echo "Scene name is: $scene"
+
+video=$(find . -maxdepth 1 -name '*.MOV' -o -name '*.mp4' -o -name '*.MP4' -o -name '*.m4v' -o -name '*.webm' -o -name '*.avi')
+echo "Video is $video"
+
+if [ -d "origjpg" ]; then
+  rm -r origjpg
+fi
 mkdir origjpg
-#cmd="ffmpeg -i $video -ss ${start} -t ${duration} -q:v 2 -r $rate origjpg/color_%05d.jpg"
-#echo $cmd
 
-avconv -i "${video}" -ss ${start} -t ${duration} -q:v 2 -r $rate origjpg/color_%05d.jpg
+if [ -n "${start}" ]; then _START="-ss ${start}"; fi
+if [ -n "${duration}" ]; then _DURATION="-t ${duration}"; fi
+
+avconv -i "${video}" ${_START} ${_DURATION} -q:v 2 -r ${rate} origjpg/color_%05d.jpg
+
 rate2=$(python -c "print(max(24./${rate}, 1.))")
 data="{\n\
    \t\"rate\": ${rate2},\n\
@@ -25,11 +32,9 @@ data="{\n\
    \t\"duration:\": \"${duration}\"\n\
 }\n"
 echo -e "$data"
-echo "$data">video_params.json
+printf "$data">video_params.json
 
-mkdir input
-#ffmpeg -i "$video" -r 24 -ss ${start} -t ${duration} -an input/input_cropped.mp4
+test input || mkdir input
 if [ ! -f input/input_cropped_10fps.mp4 ]; then
-    echo "ffmpeg -i \"$video\" -r 10 -ss ${start} -t ${duration} -an input/input_cropped_10fps.mp4"
-    #ffmpeg -i "$video" -r 10 -ss ${start} -t ${duration} -an input/input_cropped_10fps.mp4
+    echo "avconv -i \"$video\" -r 10 -ss ${start} -t ${duration} -an input/input_cropped_10fps.mp4"
 fi
