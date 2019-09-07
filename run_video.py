@@ -78,6 +78,8 @@ def run_lfd(path_scene, args):
 
 
 def run_tome3d(path_poses, args):
+    from imapper.pose.main_denis import main as main_denis
+    
     path_scene = os.path.dirname(path_poses)
     name_scene = os.path.basename(path_scene)
     p_skeleton = os.path.join(path_scene,
@@ -87,7 +89,6 @@ def run_tome3d(path_poses, args):
               ' not rerunning: {}'.format(p_skeleton))
         return p_skeleton
     
-    from imapper.pose.main_denis import main as main_denis
     p_intrinsics = os.path.normpath(
         os.path.join(os.path.dirname(path_poses), 'intrinsics.json'))
     if not os.path.isfile(p_intrinsics):
@@ -107,17 +108,25 @@ def run_tome3d(path_poses, args):
 
 
 def fit_full_scene(path_scene, args):
-    p_i3db = os.path.normpath(os.path.join(
+    from imapper.pose.fit_full_video import main as main_fit_full_video
+    
+    p_scenelet_db = os.path.normpath(os.path.join(
         path_scene, os.pardir,
         'pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed'
         '_withmocap_ct_full_sampling'))
-    if not os.path.isdir(p_i3db):
+    if not os.path.isdir(p_scenelet_db):
         raise RuntimeError(
             'Could not find directory {}, please download it from '
             'http://geometry.cs.ucl.ac.uk/projects/2019/imapper/'
             'pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed'
-            '_withmocap_ct_full_sampling.tar.gz'.format(p_i3db))
-    check_call('ls {}'.format(p_i3db).split(' '))
+            '_withmocap_ct_full_sampling.tar.gz'.format(p_scenelet_db))
+    _argv = ['--wp', '1',  # projection term
+             '--ws', '0.5',  # smoothness term
+             '-no-isec', '--maxiter', '15',
+             path_scene, '1', '20', '-s', p_scenelet_db, '--batch-size',
+             '1500',
+             '--output-n', '200']
+    main_fit_full_video(_argv)
 
 
 def main(argv):
