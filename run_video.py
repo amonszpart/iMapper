@@ -12,6 +12,10 @@ def _parse_args(argv):
         'f', type=str,
         help='Video file')
     parser.add_argument(
+        '--gpu-id', type=str,
+        help='CUDA_VISIBLE_DEVICES=<GPU_ID>'
+    )
+    parser.add_argument(
         '--rate', type=int,
         help='Video subsample rate',
         default=10)
@@ -23,11 +27,6 @@ def _parse_args(argv):
         '--path-lfd', type=str,
         help='Path to Lifting from the Deep root',
         default='/opt/Lifting-from-the-Deep-release')
-    parser.add_argument(
-        '--gpu-id', type=str,
-        help='CUDA_VISIBLE_DEVICES=<GPU_ID>',
-        default='0'
-    )
     args = parser.parse_args(argv)
     
     return args
@@ -70,7 +69,8 @@ def run_lfd(path_scene, args):
     cmd = 'python2 {:s}/demo_aron.py -d {:s} --no-vis' \
         .format(args.path_lfd, p_origjpg)
     my_env = os.environ.copy()
-    my_env['PYTHONPATH'] = '{}:{}'.format(my_env['PYTHONPATH'], args.path_lfd)
+    my_env['PYTHONPATH'] = '{}:{}:{}'.format(args.path_lfd, args.path_imapper,
+                                             my_env['PYTHONPATH'])
     my_env['CUDA_VISIBLE_DEVICES'] = args.gpu_id
     check_call(cmd.split(' '), cwd=args.path_lfd, env=my_env)
     
@@ -117,6 +117,7 @@ def fit_full_scene(path_scene, args):
             'http://geometry.cs.ucl.ac.uk/projects/2019/imapper/'
             'pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed'
             '_withmocap_ct_full_sampling.tar.gz'.format(p_i3db))
+    check_call('ls {}'.format(p_i3db).split(' '))
 
 
 def main(argv):
