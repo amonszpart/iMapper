@@ -142,18 +142,21 @@ def filter_spans_to_replace(spans, chosen, c_threshold):
         actor_ids.add(c.actor_id)
         
         # find closest active Span
-        closest = min(
-            (c2 for c2 in chosen if c2 != c and c2.active),
-            key=lambda _c: get_delta_frame_id(c, _c))
-        
-        # time difference to closest active Span
-        dt = get_delta_frame_id(c, closest)
-        
-        # remove, if has a more characteristic neighbour that's active
-        # TODO: this might be unnecessary, could be swapped for Span2
-        # immediately
-        if dt == 1 and closest.active and closest.charness > c.charness:
-            c.active = False
+        try:
+            closest = min(
+                (c2 for c2 in chosen if c2 != c and c2.active),
+                key=lambda _c: get_delta_frame_id(c, _c))
+
+            # time difference to closest active Span
+            dt = get_delta_frame_id(c, closest)
+
+            # remove, if has a more characteristic neighbour that's active
+            # TODO: this might be unnecessary, could be swapped for Span2
+            # immediately
+            if dt == 1 and closest.active and closest.charness > c.charness:
+                c.active = False
+        except ValueError as error:
+            pass
             
     # re-activate inactive ones above threshold without objects (Span2)
     # for i in range(len(chosen_srtd)):
@@ -239,36 +242,34 @@ def find_surrounding(span, spans):
                key=lambda _s: min(_s.end - mid, mid - _s.start))
 
 
-def construct_command(name_query, span, tc, surr):
+def construct_command(name_query, span, tc, surr, path_scenes_root,
+                      path_scenelets_db):
     comm = '# ' if not span.active else ''
+    
+    # Replace bad walking poses in input
     remove_objects = ' --remove-objects' \
         if span.active and isinstance(span, Span2) \
         else ''
-    # if not span.active:
-    #     cmd = "# %s" % cmd
-    # elif isinstance(span, Span2):
-    #     cmd = '{} --remove-objects'.format(cmd)
-    
-    path_root = '/media/data/amonszpa/stealth/shared/video_recordings'
+     
     cmd = "{comm:s}D=\"{root:s}/{scene:s}/opt2b/{t0:03d}_{t1:03d}\";\n" \
           "{comm:s}if [ ! -d ${{D}} ]; then\n" \
-          "{comm:s}\tpython3 stealth/pose/opt_consistent.py -silent " \
+          "{comm:s}\tpython3 imapper/pose/opt_consistent.py -silent " \
           "--wp 1 --ws 0.05 --wi 1. --wo 1. " \
           "-w-occlusion -w-static-occlusion --maxiter 15 " \
           "--nomocap -v " \
           "{root:s}/{scene:s}/skel_{scene:s}_unannot.json " \
           "independent " \
-          "-s /media/data/amonszpa/stealth/shared" \
-          "/pigraph_scenelets__linterval_squarehist_large_radiusx2_" \
-          "smoothed_withmocap_ct_full_sampling " \
-          "--gap {t0:03d} {t1:03d} --batch-size 10 --dest-dir opt2 " \
+          "-s {scenelets_db:s} " \
+          "--gap {t0:03d} {t1:03d} --batch-size ${{BATCH_SIZE}} " \
+          "--dest-dir opt2 " \
           "--candidates opt1/{s0:03d}_{s1:03d} --n-candidates 200 " \
           "-tc {tc:.2f}{remove_objects:s}\n" \
           "{comm:s}fi" \
         .format(scene=name_query, t0=span.start, t1=span.end,
                 tc=tc, s0=surr.start, s1=surr.end,
-                root=path_root, comm=comm,
-                remove_objects=remove_objects)
+                root=path_scenes_root, comm=comm,
+                remove_objects=remove_objects,
+                scenelets_db=path_scenelets_db)
     return cmd
 
 
@@ -299,23 +300,32 @@ def main(argv):
     pjoin = os.path.join
     
     parser = argparse.ArgumentParser("")
-    parser.add_argument('d', type=_check_exists,
-                        help="Input directory")
+    parser.add_argument(
+        'd', type=_check_exists,
+        help="Input directory")
+    parser.add_argument(
+        'db', type=_check_exists,
+        help="Path to scenelets database"
+    )
     parser.add_argument(
         '-o', '--opt-folder',
         help="Which optimization output to process. Default: opt1",
         default='opt1')
     parser.add_argument(
-        '-limit', type=int, help="How many scenelets to aggregate.",
+        '-limit', type=int,
+        help="How many scenelets to aggregate.",
         default=3
     )
-    parser.add_argument('--c-threshold',
-                        help='Distance threshold. Default: 0.3',
-                        type=float, default=0.3)
-    parser.add_argument('--d-threshold',
-                        help='Distance threshold. Default: 0.4',
-                        type=float, default=0.4)
+    parser.add_argument(
+        '--c-threshold',
+        help='Distance threshold. Default: 0.3',
+        type=float, default=0.3)
+    parser.add_argument(
+        '--d-threshold',
+        help='Distance threshold. Default: 0.4',
+        type=float, default=0.4)
     args = parser.parse_args(argv)
+    path_scenes_root = os.path.normpath(pjoin(args.d, os.pardir))
     print("Working with %s" % args.d)
     d = pjoin(args.d, args.opt_folder)
     
@@ -431,18 +441,17 @@ def main(argv):
     # actors_output = set()
     p_cmd = os.path.join(args.d, 'gap_command_new.sh')
     with open(p_cmd, 'w') as f:
+        f.write('BATCH_SIZE=8\n\n')
         for actor_id in range(n_actors):
             f.write('######\n# Actor {:d}\n######\n\n'.format(actor_id))
             for span in chain(chosen, spans_r_filtered):
                 if not span.actor_id == actor_id:
                     continue
                 surr = find_surrounding(span, spans)
-                cmd = construct_command(name_query=name_query, span=span,
-                                        tc=args.c_threshold, surr=surr)
-                # if not span.active:
-                #     cmd = "# %s" % cmd
-                # elif isinstance(span, Span2):
-                #     cmd = '{} --remove-objects'.format(cmd)
+                cmd = construct_command(
+                    name_query=name_query, span=span, tc=args.c_threshold,
+                    surr=surr, path_scenes_root=path_scenes_root,
+                    path_scenelets_db=args.db)
                     
                 if isinstance(span.charness, float):
                     f.write("# charness: %g\n" % span.charness)
@@ -451,6 +460,7 @@ def main(argv):
                 # if span.charness < args.c_threshold \
                 #         and actor_id in actors_output:
                 # actors_output.add(actor_id)
+                
                 f.write('{}\n\n'.format(cmd))
             f.write('\n\n')
         # with open(pjoin(d_time, 'avg_charness.json')) as fch:

@@ -17,7 +17,6 @@ from math import radians
 # if the file is called directly (just for testing), add '../..' (imapper) to the python path
 if __name__ == '__main__':
     p_imapper = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../'))
-    print(p_imapper)
     if p_imapper not in sys.path:
         sys.path.append(p_imapper)
 
@@ -1486,7 +1485,7 @@ if __name__ == '__main__':
     try:
         scene_name = os.path.basename(
             os.path.normpath(os.path.dirname(args.path) + '/..'))
-        if scene_name.startswith('opt'):
+        if scene_name.startswith('opt') or scene_name.startswith('output'):
             scene_name = os.path.basename(
                 os.path.normpath(os.path.dirname(args.path) + '/../..'))
         scene_file_name = os.path.basename(args.path)
@@ -1536,7 +1535,7 @@ if __name__ == '__main__':
             )
         
         if True:
-            import stealth.blender.replace_objects_w_models
+            import imapper.blender.replace_objects_w_models
             bpy.ops.file.find_missing_files(directory='/Users/aron/workspace/ucl/stealth/data/models/')
             bpy.ops.file.pack_all()
             

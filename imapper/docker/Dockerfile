@@ -28,8 +28,8 @@ RUN git clone \
  && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config && \
  ln -s /usr/bin/ffmpeg /usr/bin/avconv
 
-RUN cd /opt/iMapper/i3DB \
- && wget http://geometry.cs.ucl.ac.uk/projects/2019/imapper/pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz \
+RUN echo "hello" && cd /opt/iMapper/i3DB && \
+ wget http://geometry.cs.ucl.ac.uk/projects/2019/imapper/pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz \
  && tar -xvzf pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz \
  && rm -rf pigraph_scenelets__linterval_squarehist_large_radiusx2_smoothed_withmocap_ct_full_sampling.tar.gz
 
@@ -46,7 +46,8 @@ test \"\$\(service ssh status | grep 'not'\)\" \&\& service ssh start\n/" \
 
 WORKDIR "/opt/iMapper"
 
-RUN if [ -f imapper/scenelet_fit/setup.py ]; then \
+RUN git checkout dev/amonszpa/run_video && \
+    if [ -f imapper/scenelet_fit/setup.py ]; then \
       python3 imapper/scenelet_fit/setup.py build_ext --inplace; \
     fi
 

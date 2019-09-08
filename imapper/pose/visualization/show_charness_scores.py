@@ -254,53 +254,7 @@ def show_folder(argv):
                         xytext=(t + step, c-0.1),
                         arrowprops=dict(facecolor='none', shrink=0.03))
 
-    extract_gaps([args.video])
-
-    if False:
-        with open(pjoin(d, 'slots.json'), 'w') as f:
-            json.dump(windows, f)
-
-        with open(pjoin(args.video, 'opt1', 'slots.json'), 'r') as f:
-            windows = json.load(f)
-            for window in windows:
-                t0 = window[0]
-                t1 = window[2]
-
-                # if too small, make it at least 20
-                if t1 - t0 < args.window_size:
-                    diff = int(ceil((args.window_size - (t1 - t0)) / 2.))
-                    t0 -= diff
-                    t1 += diff
-                assert t1 - t0 >= args.window_size
-
-                # which candidates to use (need a 20 window)
-                span = (t1 - t0) // 2
-                g0 = window[1] - span
-                g1 = window[1] + span
-                cmd = "python3 stealth/pose/opt_consistent.py -silent " \
-                      "--wp 10 --ws 0.05 --wi 1. --wo 1. " \
-                      "-w-occlusion -w-static-occlusion --maxiter 15 -v " \
-                      "/media/data/amonszpa/stealth/shared/video_recordings" \
-                      "/{scene:s}/skel_{scene:s}_unannot.json independent -s " \
-                      "/media/data/amonszpa/stealth/shared" \
-                      "/pigraph_scenelets__linterval_squarehist_large_radiusx2_" \
-                      "smoothed_withmocap_ct_full_sampling " \
-                      "--gap {t0:03d} {t1:03d} --batch-size 15 --dest-dir opt2 " \
-                      "--candidates opt1/{g0:03d}_{g1:03d} --n-candidates 200 " \
-                      "-tc 0.35".format(scene=name_query, t0=t0, t1=t1, g0=g0, g1=g1)
-                print(cmd)
-                while g1 < t1+100:
-                    p_opt1 = os.path.join(args.video, 'opt1', "%03d_%03d" % (g0, g1))
-                    if not os.path.exists(p_opt1):
-                        lg.debug("Does not exist: %s" % p_opt1)
-                        g0 += 1
-                        g1 += 1
-                    else:
-                        break
-
-                with open(pjoin(args.video, 'gap_command.sh'), 'a') as f2:
-                    f2.write(cmd)
-                    f2.write("\n")
+    # extract_gaps([args.video])
 
     # labels
     ax.set_title("Scores and charness w.r.t time: max charness: #%d %g" %
@@ -323,8 +277,6 @@ def show_folder(argv):
     p_out = os.path.join(d, 'charnesses.svg')
     plt.savefig(p_out)
     lg.debug("saved to %s" % p_out)
-
-
 
 
 if __name__ == '__main__':

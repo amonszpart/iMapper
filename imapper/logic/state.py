@@ -25,10 +25,6 @@ from imapper.logic.geometry import rot_y
 from imapper.logic.joints import Joint
 from imapper.logic.mesh_OBJ import MeshOBJ, Scene
 from imapper.visualization.vis_skeleton import VisSkeleton
-try:
-    from imapper.visualizer.visualizer import Visualizer
-except ImportError:
-    lg.error("Could not import vtk")
 from imapper.config.conf import Conf
 from imapper.util.timer import Timer
 
@@ -449,29 +445,9 @@ class State(object):
         weight_hist = hist.get_weight(ob.label, poly_local)
 
         # debug vis
-        if False and (('ahouse_mati5_2014-05-16-19-57-44' in sclt.name_scene) \
-                          and ('scenelet_24' in sclt.name_scenelet)):
-            # and ob.label == u'couch':
-            vis = Visualizer()
-            vis.add_coords()
-            for oid, obb in enumerate(obbs):
-                vis.add_mesh(MeshOBJ.from_obb(obb), "obb%d" % oid)
-            VisSkeleton.vis_skeleton(
-                vis, sclt.skeleton.get_pose(mid_frame_id), "skel")
-            vis.show()
-            hist.plot(show=False,
-                      polys_show={ob.label:
-                                      [(poly_local, weight_hist)]})
-
-            logging.info("Debugshow: %s"
-                         % repr(sclt.name_scene,
-                                sclt.name_scenelet, ob.label))
-            plt.show()
-            plt.close()
-        else:
-            logging.info(
-                "%s" % repr((sclt.name_scene, sclt.name_scenelet,
-                             ob.label)))
+        logging.info(
+            "%s" % repr((sclt.name_scene, sclt.name_scenelet,
+                         ob.label)))
 
         # logging.info("Weight [%s] is %f"
         #              % (sclt.name_scenelet, weight_hist))

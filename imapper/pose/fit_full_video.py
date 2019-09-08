@@ -16,6 +16,7 @@ from imapper.logic.skeleton import Skeleton
 from imapper.util.my_argparse import argparse_check_exists
 from imapper.util.stealth_logging import lg
 from imapper.pose.visualization.show_charness_scores import show_folder
+from imapper.pose.visualization.extract_gaps import main as extract_gaps
 from imapper.util.json import json
 
 
@@ -156,7 +157,7 @@ def main(argv):
         except FileNotFoundError as e:
             lg.error("e: %s" % e)
             if e.__str__().endswith('_2d_00.json\''):
-                from stealth.pose.main_denis import main as opt0
+                from imapper.pose.main_denis import main as opt0
                 argv_opt0 = ['s8', '-d', "%s/denis" % d_query,
                              '-smooth', '0.005']
                 opt0(argv_opt0)
@@ -167,6 +168,8 @@ def main(argv):
 
         # once = True
     show_folder([args.video])
+    
+    extract_gaps([args.video, args.s])
 
     print("skipped: %s" % skipped)
 
