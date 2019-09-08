@@ -300,12 +300,12 @@ def main(argv):
     
     path_scene = os.path.dirname(args.f)
     
-    # create_origjpg(path_scene=path_scene, args=args)
-    #
-    # path_poses = run_lfd(path_scene=path_scene, args=args)
-    # run_tome3d(path_poses, args)
-    #
-    # fit_full_scene(path_scene=path_scene, args=args)
+    create_origjpg(path_scene=path_scene, args=args)
+
+    path_poses = run_lfd(path_scene=path_scene, args=args)
+    run_tome3d(path_poses, args)
+
+    fit_full_scene(path_scene=path_scene, args=args)
     
     combine_candidates(path_scene=path_scene, args=args)
     

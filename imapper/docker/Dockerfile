@@ -46,10 +46,9 @@ test \"\$\(service ssh status | grep 'not'\)\" \&\& service ssh start\n/" \
 
 WORKDIR "/opt/iMapper"
 
-RUN git checkout dev/amonszpa/run_video && \
-    if [ -f imapper/scenelet_fit/setup.py ]; then \
-      python3 imapper/scenelet_fit/setup.py build_ext --inplace; \
-    fi
+RUN git fetch && git checkout dev/amonszpa/run_video && \
+    pwd && ls imapper/scenelet_fit && \
+    python3 imapper/scenelet_fit/setup.py build_ext --inplace
 
 # docker build -t nas:5000/arons-imapper docker
 # docker stop arons-imapper; docker rm arons-imapper; nvidia-docker run -it -v /mnt/encnas:/mnt/encnas -v /mnt/encnas2:/mnt/encnas2 -v /mnt/nas1:/mnt/nas -v /mnt/nas1:/mnt/nas1 -v /mnt/nas2:/mnt/nas2 -v /mnt/cache1:/mnt/cache --name arons-imapper -p 32777:22 --cap-add SYS_PTRACE nas:5000/arons-imapper bash
