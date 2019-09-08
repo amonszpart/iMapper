@@ -20,9 +20,9 @@
 
 ### Requirements
 
-* CUDA capable GPU
-* docker
-* nvidia-docker
+- CUDA capable GPU
+- docker
+- nvidia-docker
 
 ### How to run:
 
@@ -38,8 +38,9 @@ git clone https://github.com/amonszpart/iMapper.git
 cd iMapper
 docker build -t imapper imapper/docker
 nvidia-docker run -it --name iMapper \
- -v ${PATH_TO_FOLDER_CONTAINING_VIDEO}:/data:rw \
+ -v ${PATH_TO_FOLDER_CONTAINING_VIDEO}:/opt/iMapper/i3DB/MyScene:rw \
  imapper \
- bash -c "CUDA_VISIBLE_DEVICES=0 python3 run_video.py /data/${VIDEO} --gpu-id 0"
+ bash -c "CUDA_VISIBLE_DEVICES=0 \
+          python3 run_video.py /opt/iMapper/i3DB/MyScene/${VIDEO} --gpu-id 0"
 ```
 
