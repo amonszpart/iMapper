@@ -5,20 +5,7 @@ from imapper.util.stealth_logging import lg
 
 if 'matplotlib' not in sys.modules:
     import matplotlib as matplotlib
-    # if sys.version_info[0] < 3:
-    uname_lower = platform.uname()[1].lower()
-    if 'thorin' in platform.uname()[1] \
-        or 'gimli' in platform.uname()[1] \
-        or 'balin' in platform.uname()[1]:
-        matplotlib.use('Agg')
-    elif 'alienware' in uname_lower:
-        matplotlib.use('Qt5Agg')
-    elif 'arons-macbook-pro' in uname_lower:
-        matplotlib.use('Agg')
-        pass
-    else:
-        assert False, uname_lower
-        matplotlib.use('Qt4Agg')
+    matplotlib.use('Agg')
     matplotlib.rc('font', family='DejaVu Sans')
 else:
     matplotlib = sys.modules['matplotlib']
